@@ -21,6 +21,22 @@ int main() {
 		std::cout << "Error creating renderer!" << std::endl;
 	}
 
+	// Render test image
+	SDL_RenderClear(renderer);
+	for(int y = WINDOW_HEIGHT - 1; y >= 0; --y) {
+		for(int x = 0; x < WINDOW_WIDTH; ++x) {
+			double r = double(y) / (WINDOW_WIDTH - 1);
+			double g = double(x) / (WINDOW_HEIGHT - 1);
+			double b = 0.25;
+			int ir = static_cast<int>(255.999 * r);
+			int ig = static_cast<int>(255.999 * g);
+			int ib = static_cast<int>(255.999 * b);
+			SDL_SetRenderDrawColor(renderer, ir, ig, ib, 255);
+			SDL_RenderDrawPoint(renderer, x, y);
+		}
+	}
+	SDL_RenderPresent(renderer);
+
 	bool quit = false;
 	while(!quit) {
 		SDL_Event sdl_event;

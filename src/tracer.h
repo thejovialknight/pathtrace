@@ -1,8 +1,84 @@
 #pragma once
 #include "vec3.h"
 #include "ray.h"
+#include "hitinfo.h"
+#include "world.h"
+#include "sphere.h"
 #include <SDL2/SDL.h>
 #include <cmath>
+#include <limits>
+
+Vec3 color_from_ray(const Ray& ray, const World& world) {
+    double t_max = std::numeric_limits<double>::infinity();
+    HitInfo hit_info(false); // Stores the closest hit
+
+    // For different shapes just need more for loops, continuing to populate hit info based on proximity
+    for(const Sphere& sphere : world.spheres) {
+        if(hit_info.hit) {
+            t_max = hit_info.t;
+        }
+        HitInfo temp_info = sphere.hit(ray, 0, t_max);
+        if(temp_info.hit) {
+            hit_info = temp_info;
+        }
+    }
+
+    if(hit_info.hit) {
+        return 0.5 * (hit_info.normal + Vec3(1, 1, 1));
+    }
+
+    Vec3 unit_direction = unit_vector(ray.direction);
+    double t = 0.5 * (unit_direction.y + 1.0);
+    return (1.0 - t) * Vec3(1, 1, 1) + t * Vec3(0.5, 0.7, 1.0);
+}
+
+void render(SDL_Renderer* renderer, World& world, Vec3 cam_velocity) {
+	// Screen settings
+	const int image_width = 128;
+	const int image_height = 128;
+	const int pixel_scalar = 8;
+
+	// Camera settings
+	const double viewport_height = 2.0;
+	const double viewport_width = 2.0;
+    const double focal_length = 1.0;
+	
+	//
+	const Vec3 origin = Vec3(0, 0, 0);
+	const Vec3 horizontal = Vec3(viewport_width, 0, 0);
+	const Vec3 vertical = Vec3(0, viewport_height, 0);
+	const Vec3 lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vec3(0, 0, focal_length);
+
+    // Transform world to simulate cam movement
+    world.translate(cam_velocity);
+
+	// Render image
+	SDL_RenderClear(renderer);
+	for(int y = image_height - 1; y >= 0; --y) {
+		for(int x = 0; x < image_width; ++x) {
+			double u = double(x) / (image_width - 1);
+			double v = double(y) / (image_height - 1);
+			Ray ray(
+				origin, 
+				lower_left_corner + u * horizontal + v * vertical - origin
+			);
+			Vec3 pixel_color = color_from_ray(ray, world) * 255.0;
+			SDL_SetRenderDrawColor(renderer, (int)pixel_color.x, (int)pixel_color.y, (int)pixel_color.z, 255);
+
+			// Setup scaled rect and draw
+			SDL_Rect rect;
+			rect.x = x * pixel_scalar;
+			rect.y = y * pixel_scalar;
+			rect.w = pixel_scalar;
+			rect.h = pixel_scalar;
+			SDL_RenderFillRect(renderer, &rect);
+			//SDL_RenderPresent(renderer);
+		}
+	}
+	SDL_RenderPresent(renderer);
+}
+
+// ALL OLD CODE!!
 
 // New code post section 6.2
 // Simplified quadratic formula by halving b 
@@ -43,7 +119,6 @@ double old_hit_sphere(const Vec3& sphere_center, double sphere_radius, const Ray
         return (-b - sqrt(discriminant)) / (2.0 * a);
     }
 }
-
 // Linearly blends white and blue depending on
 // the height of the y coordinate after scaling the ray direction to unit length.
 Vec3 ray_color(const Ray& ray) {
@@ -62,45 +137,3 @@ Vec3 ray_color(const Ray& ray) {
 	return (1.0 - t) * Vec3(0.1, 0.1, 0.1) + t * Vec3(0.5, 0.2, 0.2);
 }
 
-void render(SDL_Renderer* renderer, double x_off) {
-	// Screen settings
-	const int image_width = 128;
-	const int image_height = 128;
-	const int pixel_scalar = 8;
-
-	// Camera settings
-	const double viewport_height = 2.0;
-	const double viewport_width = 2.0;
-    const double focal_length = 1.0;
-	
-	//
-	const Vec3 origin = Vec3(x_off, 0, 0);
-	const Vec3 horizontal = Vec3(viewport_width, 0, 0);
-	const Vec3 vertical = Vec3(0, viewport_height, 0);
-	const Vec3 lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vec3(0, 0, focal_length);
-
-	// Render image
-	SDL_RenderClear(renderer);
-	for(int y = image_height - 1; y >= 0; --y) {
-		for(int x = 0; x < image_width; ++x) {
-			double u = double(x) / (image_width - 1);
-			double v = double(y) / (image_height - 1);
-			Ray ray(
-				origin, 
-				lower_left_corner + u * horizontal + v * vertical - origin
-			);
-			Vec3 pixel_color = ray_color(ray) * 255.0;
-			SDL_SetRenderDrawColor(renderer, (int)pixel_color.x, (int)pixel_color.y, (int)pixel_color.z, 255);
-
-			// Setup scaled rect and draw
-			SDL_Rect rect;
-			rect.x = x * pixel_scalar;
-			rect.y = y * pixel_scalar;
-			rect.w = pixel_scalar;
-			rect.h = pixel_scalar;
-			SDL_RenderFillRect(renderer, &rect);
-			//SDL_RenderPresent(renderer);
-		}
-	}
-	SDL_RenderPresent(renderer);
-}

@@ -1,6 +1,10 @@
+// CURRENTLY: at the equivelant of section 7. Finally fixed depth bug.
+// Should be noted that we are still flipped on the y compared to tutorial.
+
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "tracer.h"
+#include "world.h"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
@@ -23,11 +27,24 @@ int main() {
 		return 1;
 	}
 
+    // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
+    World world;
+    world.spheres.emplace_back(Sphere(Vec3(0, 0, -1), 0.5));
+    world.spheres.emplace_back(Sphere(Vec3(0.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(1.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(2.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(-0.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(-1.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(-2.5, 0, -2), 0.2));
+    world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100));
+
     // Debug movement vars
-    double x_off = 0.0;
     bool left = false;
     bool right = false;
-    const double x_speed = 0.01;
+    bool up = false;
+    bool down = false;
+    const double x_speed = 0.05;
+    Vec3 cam_velocity;
 
 	bool quit = false;
 	while(!quit) {
@@ -44,6 +61,12 @@ int main() {
                     case SDLK_RIGHT :
                         right = true;
                         break;
+                    case SDLK_UP :
+                        up = true;
+                        break;
+                    case SDLK_DOWN :
+                        down = true;
+                        break;
                     default :
                         break;
                 }
@@ -56,17 +79,27 @@ int main() {
                     case SDLK_RIGHT :
                         right = false;
                         break;
+                    case SDLK_UP :
+                        up = false;
+                        break;
+                    case SDLK_DOWN :
+                        down = false;
+                        break;
                     default :
                         break;
                 }
             }
 	    }
         
-        double x_vel = 0;
-        if(left) x_vel -= x_speed;
-        if(right) x_vel += x_speed;
-        x_off += x_vel;
-        render(renderer, x_off);
+        cam_velocity.x = 0;
+        cam_velocity.z = 0;
+        if(left) cam_velocity.x += x_speed;
+        if(right) cam_velocity.x -= x_speed;
+        if(up) cam_velocity.z += x_speed;
+        if(down) cam_velocity.z -= x_speed;
+
+        render(renderer, world, cam_velocity);
+
 	}
 
 	SDL_DestroyWindow(window);

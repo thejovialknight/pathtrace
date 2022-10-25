@@ -23,8 +23,11 @@ int main() {
 		return 1;
 	}
 
-	// Render test image
-	render(renderer);
+    // Debug movement vars
+    double x_off = 0.0;
+    bool left = false;
+    bool right = false;
+    const double x_speed = 0.01;
 
 	bool quit = false;
 	while(!quit) {
@@ -33,7 +36,37 @@ int main() {
 			if(sdl_event.type == SDL_QUIT) {
 				quit = true;
 			}
-		}
+            if(sdl_event.type == SDL_KEYDOWN) {
+                switch(sdl_event.key.keysym.sym) {
+                    case SDLK_LEFT :
+                        left = true;
+                        break;
+                    case SDLK_RIGHT :
+                        right = true;
+                        break;
+                    default :
+                        break;
+                }
+            }
+            if(sdl_event.type == SDL_KEYUP) {
+                switch(sdl_event.key.keysym.sym) {
+                    case SDLK_LEFT :
+                        left = false;
+                        break;
+                    case SDLK_RIGHT :
+                        right = false;
+                        break;
+                    default :
+                        break;
+                }
+            }
+	    }
+        
+        double x_vel = 0;
+        if(left) x_vel -= x_speed;
+        if(right) x_vel += x_speed;
+        x_off += x_vel;
+        render(renderer, x_off);
 	}
 
 	SDL_DestroyWindow(window);

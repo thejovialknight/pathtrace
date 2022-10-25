@@ -10,7 +10,7 @@ struct Ray {
 		origin(origin), direction(direction) {}
 
 	// Returns a point along a ray scaled by t
-	Vec3 at(double t) {
+	Vec3 at(const double t) const {
 		return origin + t * direction;
 	}
 };

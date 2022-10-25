@@ -13,53 +13,6 @@ struct Vec3 {
 	double length_squared() const { return (x * x) + (y * y) + (z * z); }
 
 	Vec3 operator-() const { return Vec3(-x, -y, -z); }
-
-	/*
-	Vec3 operator+(const Vec3& b) const {
-		return Vec3(x + b.x, y + b.y, z + b.z);
-	}
-
-	Vec3 operator-(const Vec3& b) const {
-		return Vec3(x - b.x, y - b.y, z - b.z);
-	}
-
-	Vec3 operator*(const Vec3& b) const {
-		return Vec3(x * b.x, y * b.y, z * b.z);
-	}
-
-	Vec3 operator*(const double t) const {
-		return Vec3(t * x, t * y, t * z);
-	}
-
-	Vec3 operator/(const double t) const {
-		double op = 1 / t;
-		return Vec3(x * op, y * op, z * op);
-	}
-
-	Vec3 operator+=(const Vec3& other) const { 
-		return Vec3(x, y, z) + other;
-	}
-
-	Vec3 operator-=(const Vec3& other) const { 
-		return Vec3(x, y, z) - other;
-	}
-
-	Vec3 operator*=(const Vec3& other) const { 
-		return Vec3(x, y, z) * other;
-	}
-
-	Vec3 operator/=(const Vec3& other) const { 
-		return Vec3(x, y, z) / other;
-	}
-
-	Vec3 operator*=(const double t) const {
-		return Vec3(x, y, z) * t;
-	}
-
-	Vec3 operator/=(const double t) const {
-		return Vec3(x, y, z) / t;
-	}
-	*/
 };
 
 Vec3 operator+(const Vec3& a, const Vec3& b);
@@ -78,4 +31,4 @@ inline Vec3 cross(const Vec3& a, const Vec3& b) {
 	);
 }
 
-inline Vec3 unit_vector(Vec3 vec) { return vec / vec.length(); }
+inline Vec3 unit_vector(const Vec3 vec) { return vec / vec.length(); }

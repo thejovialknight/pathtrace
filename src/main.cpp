@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include "tracer.h"
 #include "world.h"
+#include "random.h"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
@@ -98,8 +99,11 @@ int main() {
         if(up) cam_velocity.z += x_speed;
         if(down) cam_velocity.z -= x_speed;
 
+        // Render (with a timer)
+        Uint32 render_start_time = SDL_GetTicks();
         render(renderer, world, cam_velocity);
-
+        Uint32 render_time = SDL_GetTicks() - render_start_time;
+        std::cout << "Render took " << render_time << "ms" << std::endl;
 	}
 
 	SDL_DestroyWindow(window);

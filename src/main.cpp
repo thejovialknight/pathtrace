@@ -39,6 +39,8 @@ int main() {
     world.spheres.emplace_back(Sphere(Vec3(-2.5, 0, -2), 0.2));
     world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100));
 
+    Pathtracer tracer;
+
     // Debug movement vars
     bool left = false;
     bool right = false;
@@ -94,16 +96,18 @@ int main() {
         
         cam_velocity.x = 0;
         cam_velocity.z = 0;
-        if(left) cam_velocity.x += x_speed;
-        if(right) cam_velocity.x -= x_speed;
-        if(up) cam_velocity.z += x_speed;
-        if(down) cam_velocity.z -= x_speed;
+        if(left) cam_velocity.x -= x_speed;
+        if(right) cam_velocity.x += x_speed;
+        if(up) cam_velocity.z -= x_speed;
+        if(down) cam_velocity.z += x_speed;
+        world.camera.translate(cam_velocity);
 
         // Render (with a timer)
         Uint32 render_start_time = SDL_GetTicks();
-        render(renderer, world, cam_velocity);
+        tracer.render(world);
         Uint32 render_time = SDL_GetTicks() - render_start_time;
         std::cout << "Render took " << render_time << "ms" << std::endl;
+        tracer.draw_frame(renderer);
 	}
 
 	SDL_DestroyWindow(window);

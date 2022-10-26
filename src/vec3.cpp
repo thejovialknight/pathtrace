@@ -1,5 +1,21 @@
 #include "vec3.h"
 
+Vec3 random_in_unit_sphere() {
+    while(true) {
+        Vec3 point = Vec3::random(-1, 1);
+        if(point.length_squared() >= 1) continue;
+        return point;
+    }
+}
+
+Vec3 Vec3::random() {
+    return Vec3(random_double(), random_double(), random_double());
+}
+
+Vec3 Vec3::random(double min, double max) {
+    return Vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+}
+
 Vec3 operator+(const Vec3& a, const Vec3& b) {
 	return Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
 }

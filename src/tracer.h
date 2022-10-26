@@ -10,20 +10,21 @@
 #include <cmath>
 #include <limits>
 
-#define IMAGE_WIDTH 128
-#define IMAGE_HEIGHT 128
-#define PIXEL_SCALAR 8
-#define SAMPLES_PER_PIXEL 20
+#define IMAGE_WIDTH 64
+#define IMAGE_HEIGHT 64
+#define PIXEL_SCALAR 16
+#define SAMPLES_PER_PIXEL 6
+#define MAX_DEPTH 3
 
 struct Pathtracer {
     Vec3 pixel_colors[IMAGE_WIDTH * IMAGE_HEIGHT];
 
     void render(const World& world);
-    void render_pixel(const World& world, int x, int y);
     void draw_frame(SDL_Renderer* renderer);
 };
 
-Vec3 color_from_ray(const Ray& ray, const World& world);
+void render_pixel(const World& world, Pathtracer& tracer, int x, int y);
+Vec3 color_from_ray(const Ray& ray, const World& world, int current_depth);
 
 /* ALL OLD CODE!!
 

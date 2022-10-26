@@ -1,3 +1,3 @@
 #pragma once
 
-inline double clamp(double x, double min, double max);
+double clamp(double x, double min, double max);

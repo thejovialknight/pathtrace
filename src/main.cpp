@@ -40,6 +40,7 @@ int main() {
     world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100));
 
     Pathtracer tracer;
+    //tracer.render(world);
 
     // Debug movement vars
     bool left = false;

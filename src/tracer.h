@@ -4,6 +4,7 @@
 #include "hitinfo.h"
 #include "world.h"
 #include "sphere.h"
+#include "random.h"
 #include <SDL2/SDL.h>
 #include <cmath>
 #include <limits>
@@ -33,38 +34,36 @@ Vec3 color_from_ray(const Ray& ray, const World& world) {
 }
 
 void render(SDL_Renderer* renderer, World& world, Vec3 cam_velocity) {
-	// Screen settings
+	// Renderer settings
 	const int image_width = 128;
 	const int image_height = 128;
 	const int pixel_scalar = 8;
+    const int samples_per_pixel = 20;
 
-	// Camera settings
-	const double viewport_height = 2.0;
-	const double viewport_width = 2.0;
-    const double focal_length = 1.0;
-	
-	//
-	const Vec3 origin = Vec3(0, 0, 0);
-	const Vec3 horizontal = Vec3(viewport_width, 0, 0);
-	const Vec3 vertical = Vec3(0, viewport_height, 0);
-	const Vec3 lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vec3(0, 0, focal_length);
-
-    // Transform world to simulate cam movement
-    world.translate(cam_velocity);
+	// Camera movement
+    world.camera.translate(cam_velocity);
 
 	// Render image
 	SDL_RenderClear(renderer);
 	for(int y = image_height - 1; y >= 0; --y) {
 		for(int x = 0; x < image_width; ++x) {
-			double u = double(x) / (image_width - 1);
-			double v = double(y) / (image_height - 1);
-			Ray ray(
-				origin, 
-				lower_left_corner + u * horizontal + v * vertical - origin
-			);
-			Vec3 pixel_color = color_from_ray(ray, world) * 255.0;
-			SDL_SetRenderDrawColor(renderer, (int)pixel_color.x, (int)pixel_color.y, (int)pixel_color.z, 255);
+            // Get color. Once we get multiple samples we will
+            // need to scale the color by the number of samples
+            // i.e. scale = 1.0 / samples_per_pixel; c.r *- scale; etc...
+			Vec3 pixel_color(0, 0, 0);
+            for(int s = 0; s < samples_per_pixel; ++s) {
+                double u = (x + random_double()) / (image_width - 1);
+                double v = (y + random_double()) / (image_height - 1);
+                Ray ray = world.camera.get_ray(u, v);
+                pixel_color = pixel_color + color_from_ray(ray, world) * 255.0;
+            }
+            double luminance_scalar = 1.0 / samples_per_pixel;
+            pixel_color.x *= luminance_scalar;
+            pixel_color.y *= luminance_scalar;
+            pixel_color.z *= luminance_scalar;
 
+            // Translate to SDL
+			SDL_SetRenderDrawColor(renderer, (int)pixel_color.x, (int)pixel_color.y, (int)pixel_color.z, 255);
 			// Setup scaled rect and draw
 			SDL_Rect rect;
 			rect.x = x * pixel_scalar;

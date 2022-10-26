@@ -1,3 +1,4 @@
+#pragma once
 #include <random>
 
 // Returns a random double within the range (0.0,1.0)

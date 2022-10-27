@@ -7,8 +7,11 @@
 struct Material {
     Vec3 albedo;
     double metallicity = 0.0;
+    double fuzziness = 0.0;
+    double lightness = 0.0;
 
     Material() {}
     Material(Vec3 albedo) : albedo(albedo) {}
-    Material(Vec3 albedo, double metallicity) : albedo(albedo), metallicity(metallicity) {}
+    Material(Vec3 albedo, double metallicity, double fuzziness) : albedo(albedo), metallicity(metallicity), fuzziness(fuzziness) {}
+    Material(Vec3 albedo, double metallicity, double fuzziness, double lightness) : albedo(albedo), metallicity(metallicity), fuzziness(fuzziness) , lightness(lightness) {}
 };

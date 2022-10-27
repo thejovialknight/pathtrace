@@ -13,7 +13,7 @@
 #define IMAGE_WIDTH 128
 #define IMAGE_HEIGHT 128
 #define PIXEL_SCALAR 8
-#define SAMPLES_PER_PIXEL 8 
+#define SAMPLES_PER_PIXEL 6 
 #define MAX_DEPTH 6
 
 struct Pathtracer {

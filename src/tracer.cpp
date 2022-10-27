@@ -74,30 +74,37 @@ Vec3 color_from_ray(const Ray& ray, const World& world, int depth) {
 
     // If we hit a surface, shoot another ray from a random direction on a tangent unit sphere
     if(hit_info.hit) {
-        bool reflecting = false;
+        // If we are a light, return our albedo
+        if(hit_info.material->lightness > random_double()) {
+            return hit_info.material->albedo;
+        }
+
+        bool is_bouncing = true;
         Vec3 bounce_direction;
+        Ray bounce_ray;
         // If we are randomly scattering (diffuse case)
         if(random_double() >= hit_info.material->metallicity) {
             bounce_direction = hit_info.normal + random_unit_vector();
             if(bounce_direction.near_zero()) {
                 bounce_direction = hit_info.normal;
             }
+            bounce_ray = Ray(hit_info.point, bounce_direction);
         }
         // If we are reflecting (metallic case)
         else {
-            reflecting = true;
             Vec3 v = unit_vector(ray.direction);
             Vec3 n = hit_info.normal;
             bounce_direction = v - 2.0 * dot(v, n) * n;
+            bounce_ray = Ray(hit_info.point, bounce_direction + hit_info.material->fuzziness * random_in_unit_sphere());
+            if(dot(bounce_ray.direction, hit_info.normal) <= 0) {
+                is_bouncing = false;
+            }
         }
         
-        Ray bounce_ray = Ray(hit_info.point, bounce_direction);
         Vec3 attenuation = hit_info.material->albedo;
 
         // If scattering light. 
-        // The expression on the right side of the || only applies to reflected rays
-        // To be honest, I'm not super sure why it's needed
-        if(!reflecting || dot(bounce_ray.direction, hit_info.normal) > 0) {
+        if(is_bouncing) {
             return attenuation * color_from_ray(bounce_ray, world, depth - 1);
         }
 
@@ -113,7 +120,8 @@ Vec3 color_from_ray(const Ray& ray, const World& world, int depth) {
     // RED/BLUE */ return (1.0 - t) * Vec3(0.8, 0.2, 0.2) + t * Vec3(0.0, 0.0, 0.9);
     // BLACK/WHITE */ return (1.0 - t) * Vec3(0.9, 0.9, 0.9) + t * Vec3(0.1, 0.1, 0.1);
     // SLIGHT RED */ return (1.0 - t) * Vec3(0.9, 0.7, 0.7) + t * Vec3(0.2, 0.1, 0.1);
-    /* SKY BLUE */ return (1.0 - t) * Vec3(0.5, 0.3, 0.9) + t * Vec3(0.9, 0.9, 0.9);
+    /* DARK SLIGHT RED */ return (1.0 - t) * Vec3(0.2, 0.1, 0.1) + t * Vec3(0.1, 0.1, 0.1);
+    // SKY BLUE */ return (1.0 - t) * Vec3(0.5, 0.3, 0.9) + t * Vec3(0.9, 0.9, 0.9);
 }
 
 void Pathtracer::draw_frame(SDL_Renderer* renderer) {

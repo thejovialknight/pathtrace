@@ -29,9 +29,9 @@ int main() {
 	}
 
     // Materials
-    Material diff_red(Vec3(0.8, 0.1, 0.1), 1);
-    Material diff_grey(Vec3(0.8, 0.8, 0.2), 1);
-    Material ground(Vec3(0.2, 0.9, 0.2), 1);
+    Material diff_red(Vec3(0.8, 0.1, 0.1), 0.8, 0.6);
+    Material diff_grey(Vec3(0.8, 0.8, 0.2), 0.9, 0.5, 0.9);
+    Material ground(Vec3(0.2, 0.9, 0.2), 0.5, 0.1);
 
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world;
@@ -52,8 +52,12 @@ int main() {
     bool right = false;
     bool up = false;
     bool down = false;
-    const double x_speed = 0.05;
+
+    const double x_speed = 0.3;
     Vec3 cam_velocity;
+
+    Vec3 sphere_direction;
+    const double sphere_speed = 0.3;
 
 	bool quit = false;
 	while(!quit) {
@@ -76,6 +80,18 @@ int main() {
                     case SDLK_DOWN :
                         down = true;
                         break;
+                    case SDLK_a :
+                        sphere_direction.x = -sphere_speed;
+                        break;
+                    case SDLK_d :
+                        sphere_direction.x = sphere_speed;
+                        break;
+                    case SDLK_w :
+                        sphere_direction.z = -sphere_speed;
+                        break;
+                    case SDLK_s :
+                        sphere_direction.z = sphere_speed;
+                        break;
                     default :
                         break;
                 }
@@ -94,6 +110,18 @@ int main() {
                     case SDLK_DOWN :
                         down = false;
                         break;
+                    case SDLK_a :
+                        sphere_direction.x = 0;
+                        break;
+                    case SDLK_d :
+                        sphere_direction.x = 0;
+                        break;
+                    case SDLK_w :
+                        sphere_direction.z = 0;
+                        break;
+                    case SDLK_s :
+                        sphere_direction.z = 0;
+                        break;
                     default :
                         break;
                 }
@@ -107,6 +135,7 @@ int main() {
         if(up) cam_velocity.z -= x_speed;
         if(down) cam_velocity.z += x_speed;
         world.camera.translate(cam_velocity);
+        world.spheres[0].center = world.spheres[0].center + sphere_direction * sphere_speed;
 
         // Render (with a timer)
         Uint32 render_start_time = SDL_GetTicks();

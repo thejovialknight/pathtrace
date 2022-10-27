@@ -32,5 +32,5 @@ HitInfo Sphere::hit(const Ray& ray, double t_min, double t_max) const {
     double t = root;
     Vec3 point = ray.at(t);
     Vec3 outward_normal = (point - center) / radius;
-    return HitInfo(true, point, outward_normal, ray, t);
+    return HitInfo(true, point, outward_normal, ray, t, material);
 }

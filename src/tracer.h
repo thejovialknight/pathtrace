@@ -10,11 +10,11 @@
 #include <cmath>
 #include <limits>
 
-#define IMAGE_WIDTH 64
-#define IMAGE_HEIGHT 64
-#define PIXEL_SCALAR 16
-#define SAMPLES_PER_PIXEL 6
-#define MAX_DEPTH 3
+#define IMAGE_WIDTH 128
+#define IMAGE_HEIGHT 128
+#define PIXEL_SCALAR 8
+#define SAMPLES_PER_PIXEL 8 
+#define MAX_DEPTH 6
 
 struct Pathtracer {
     Vec3 pixel_colors[IMAGE_WIDTH * IMAGE_HEIGHT];
@@ -24,7 +24,8 @@ struct Pathtracer {
 };
 
 void render_pixel(const World& world, Pathtracer& tracer, int x, int y);
-Vec3 color_from_ray(const Ray& ray, const World& world, int current_depth);
+Vec3 color_from_ray(const Ray& ray, const World& world, int depth);
+Vec3 lambertian_reflection(HitInfo& hit_info);
 
 /* ALL OLD CODE!!
 

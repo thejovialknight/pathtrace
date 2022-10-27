@@ -4,6 +4,7 @@
 
 #include "cm_math.h"
 #include "tracer.h"
+#include "random.h"
 
 void Pathtracer::render(const World& world) { 	
 	// Render image
@@ -32,8 +33,28 @@ void render_pixel(const World& world, Pathtracer& tracer, int x, int y) {
     tracer.pixel_colors[x + y * IMAGE_WIDTH] = pixel_color;
 }
 
-Vec3 color_from_ray(const Ray& ray, const World& world, int current_depth) {
-    if(current_depth <= 0) {
+// Even more hacky approximation of a diffuse material. Probably not even be as performant.
+// Here for learning purposes
+Vec3 easy_reflection(HitInfo& hit_info) {
+    Vec3 random_in_hemisphere = random_in_unit_sphere();
+    if(dot(random_in_hemisphere, hit_info.normal) <= 0.0) {
+        random_in_hemisphere = -random_in_hemisphere;
+    }
+    return (hit_info.point + random_in_hemisphere) - hit_info.point;
+}
+
+// Simpler approximation of lambertian reflection. Should be ever so slightly cheaper.
+Vec3 lambertian_approximation(HitInfo& hit_info) {
+    return (hit_info.point + hit_info.normal + random_in_unit_sphere()) - hit_info.point;
+}
+
+// Most accurate diffuse material reflection
+Vec3 lambertian_reflection(HitInfo& hit_info) {
+    return (hit_info.point + hit_info.normal + random_unit_vector()) - hit_info.point;
+}
+
+Vec3 color_from_ray(const Ray& ray, const World& world, int depth) {
+    if(depth <= 0) {
         return Vec3(0, 0, 0);
     }
 
@@ -53,13 +74,46 @@ Vec3 color_from_ray(const Ray& ray, const World& world, int current_depth) {
 
     // If we hit a surface, shoot another ray from a random direction on a tangent unit sphere
     if(hit_info.hit) {
-        Vec3 target = hit_info.point + hit_info.normal + random_in_unit_sphere();
-        return 0.5 * color_from_ray(Ray(hit_info.point, target - hit_info.point), world, current_depth - 1);
+        bool reflecting = false;
+        Vec3 bounce_direction;
+        // If we are randomly scattering (diffuse case)
+        if(random_double() >= hit_info.material->metallicity) {
+            bounce_direction = hit_info.normal + random_unit_vector();
+            if(bounce_direction.near_zero()) {
+                bounce_direction = hit_info.normal;
+            }
+        }
+        // If we are reflecting (metallic case)
+        else {
+            reflecting = true;
+            Vec3 v = unit_vector(ray.direction);
+            Vec3 n = hit_info.normal;
+            bounce_direction = v - 2.0 * dot(v, n) * n;
+        }
+        
+        Ray bounce_ray = Ray(hit_info.point, bounce_direction);
+        Vec3 attenuation = hit_info.material->albedo;
+
+        // If scattering light. 
+        // The expression on the right side of the || only applies to reflected rays
+        // To be honest, I'm not super sure why it's needed
+        if(!reflecting || dot(bounce_ray.direction, hit_info.normal) > 0) {
+            return attenuation * color_from_ray(bounce_ray, world, depth - 1);
+        }
+
+        // If absorbed light
+        return Vec3(0, 0, 0);
+        // return 0.5 * color_from_ray(Ray(hit_info.point, lambertian_reflection(hit_info)), world, current_depth - 1);
     }
 
+    // If we didn't hit a surface, return the sky gradient
     Vec3 unit_direction = unit_vector(ray.direction);
     double t = 0.5 * (unit_direction.y + 1.0);
-    return (1.0 - t) * Vec3(0.9, 0.5, 0.5) + t * Vec3(0.1, 0.1, 0.1);
+    // WHITE */ return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(1.0, 1.0, 1.0);
+    // RED/BLUE */ return (1.0 - t) * Vec3(0.8, 0.2, 0.2) + t * Vec3(0.0, 0.0, 0.9);
+    // BLACK/WHITE */ return (1.0 - t) * Vec3(0.9, 0.9, 0.9) + t * Vec3(0.1, 0.1, 0.1);
+    // SLIGHT RED */ return (1.0 - t) * Vec3(0.9, 0.7, 0.7) + t * Vec3(0.2, 0.1, 0.1);
+    /* SKY BLUE */ return (1.0 - t) * Vec3(0.5, 0.3, 0.9) + t * Vec3(0.9, 0.9, 0.9);
 }
 
 void Pathtracer::draw_frame(SDL_Renderer* renderer) {

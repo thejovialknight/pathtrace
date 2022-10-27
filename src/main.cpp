@@ -28,16 +28,21 @@ int main() {
 		return 1;
 	}
 
+    // Materials
+    Material diff_red(Vec3(0.8, 0.1, 0.1), 1);
+    Material diff_grey(Vec3(0.8, 0.8, 0.2), 1);
+    Material ground(Vec3(0.2, 0.9, 0.2), 1);
+
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world;
-    world.spheres.emplace_back(Sphere(Vec3(0, 0, -1), 0.5));
-    world.spheres.emplace_back(Sphere(Vec3(0.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(1.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(2.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(-0.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(-1.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(-2.5, 0, -2), 0.2));
-    world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100));
+    world.spheres.emplace_back(Sphere(Vec3(0, 0, -1), 0.5, &diff_grey));
+    world.spheres.emplace_back(Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(1.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(2.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(-0.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(-1.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(-2.5, 0, -2), 0.2, &diff_red));
+    world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100, &ground));
 
     Pathtracer tracer;
     //tracer.render(world);

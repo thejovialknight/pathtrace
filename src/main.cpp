@@ -34,15 +34,19 @@ int main() {
     Material ground(Vec3(0.2, 0.9, 0.2), 0.5, 0.1);
 
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
-    World world;
-    world.spheres.emplace_back(Sphere(Vec3(0, 0, -1), 0.5, &diff_grey));
-    world.spheres.emplace_back(Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(1.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(2.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(-0.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(-1.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(-2.5, 0, -2), 0.2, &diff_red));
-    world.spheres.emplace_back(Sphere(Vec3(0, 100.5, -1), 100, &ground));
+    World world(
+        Camera(Vec3(0, 0, 1), Vec3(0, 0, 1)),
+        {
+            Sphere(Vec3(0, 0, -1), 0.5, &diff_grey),
+            Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(1.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(2.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(-0.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(-1.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(-2.5, 0, -2), 0.2, &diff_red),
+            Sphere(Vec3(0, 100.5, -1), 100, &ground)
+        }
+    );
 
     Pathtracer tracer;
     //tracer.render(world);
@@ -55,6 +59,7 @@ int main() {
 
     const double x_speed = 0.3;
     Vec3 cam_velocity;
+    SDL_SetRelativeMouseMode(SDL_TRUE);
 
     Vec3 sphere_direction;
     const double sphere_speed = 0.3;
@@ -66,8 +71,17 @@ int main() {
 			if(sdl_event.type == SDL_QUIT) {
 				quit = true;
 			}
+
+            if(sdl_event.type == SDL_MOUSEMOTION) {
+                const double rotation_speed = 30;
+                world.camera.rotate(Vec3(sdl_event.motion.xrel * rotation_speed, sdl_event.motion.yrel * rotation_speed, 0));
+            }
+
             if(sdl_event.type == SDL_KEYDOWN) {
                 switch(sdl_event.key.keysym.sym) {
+                    case SDLK_ESCAPE :
+                        quit = true;
+                        break;
                     case SDLK_LEFT :
                         left = true;
                         break;
@@ -96,6 +110,7 @@ int main() {
                         break;
                 }
             }
+
             if(sdl_event.type == SDL_KEYUP) {
                 switch(sdl_event.key.keysym.sym) {
                     case SDLK_LEFT :

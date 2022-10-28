@@ -13,8 +13,8 @@
 #define IMAGE_WIDTH 128
 #define IMAGE_HEIGHT 128
 #define PIXEL_SCALAR 8
-#define SAMPLES_PER_PIXEL 6 
-#define MAX_DEPTH 6
+#define SAMPLES_PER_PIXEL 3 
+#define MAX_DEPTH 3
 
 struct Pathtracer {
     Vec3 pixel_colors[IMAGE_WIDTH * IMAGE_HEIGHT];

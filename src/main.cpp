@@ -1,5 +1,28 @@
-// CURRENTLY: at the equivelant of section 7. Finally fixed depth bug.
-// Should be noted that we are still flipped on the y compared to tutorial.
+// Okay, foked bro. Going to need to refactor all of this to make sense finally.
+// This will be good to require us to understand the math better.
+// Look at camera.h for more notes.
+//
+// This refactor will include more than just getting the camera refactored, it should also entail a major codebase refactor.
+//
+// Wait, Conner! Should you really do this before implementing Vulkan stuff? I think so, to be honest. You will be required to figure out all the math and how it works in order to do the camera and transform refactors properly. This is nothing but a good thing for Vulkan stuff.
+//
+// Okay, so what should the refactor entail?
+//
+// First, a Transform struct which contains the following:
+//  - v3 position
+//  - v3 forward // "look direction"
+//  void translate(v3)
+//  void rotate(v3)
+//
+// Second, table.h back in action to store all of our transforms. Camera has a transform and Sphere has a transform. Ooh, actually, does it? It is a Sphere, after all? It can't rotate. Lol. Yeah, I think it has a transform. If it needs to not, just precompute all the sphere objects down to simpler constructs later. In actuality, it does need a rotation for if it has like a texture or whatever.
+//
+// As a note, also make materials in a table too. Every list of things really.
+//
+// Third, refactor the tracer code to split it up into more easy to understand chunks. It's obvious things are a little out of hand there. The first obvious thing to do is to make the checking for an intersection one function call, that way especially when there are more shapes all those separate for loops won't clutter the main function.
+//
+// Fourth, create an abstraction layer around the hardware apis in preparation for Vulkan. Also, use your increasing knowledge of Vulkan to figure out what kind of an api is most sensible. For instance, we know we might be pushing the computation of ray hits off to the gpu. How might this affect the tracing code and the hardware api? 
+//
+// Don't get too fucky about this, though. Remember, if different usages of hardware incentivize different ways of structuring the code, then that should not be made generic for cleanliness if you lose that level of control you need for optimization.
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -16,7 +39,7 @@ int main() {
 		return 1;
 	}
 
-	SDL_Window* window = SDL_CreateWindow("SDL Template", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("pathtrace", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 	if(!window) {
 		std::cout << "Error creating window!" << std::endl;
 		return 1;

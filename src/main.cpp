@@ -87,6 +87,7 @@ int main() {
     Vec3 sphere_direction;
     const double sphere_speed = 0.3;
 
+
 	bool quit = false;
 	while(!quit) {
 		SDL_Event sdl_event;

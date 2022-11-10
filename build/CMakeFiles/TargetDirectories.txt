@@ -1,0 +1,3 @@
+/home/conner/repos/pathtrace/build/CMakeFiles/pathtrace.dir
+/home/conner/repos/pathtrace/build/CMakeFiles/edit_cache.dir
+/home/conner/repos/pathtrace/build/CMakeFiles/rebuild_cache.dir

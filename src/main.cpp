@@ -52,7 +52,7 @@ int main() {
 	}
 
     // Materials
-    Material diff_red(Vec3(0.8, 0.1, 0.1), 0.8, 0.6);
+    Material diff_red(Vec3(0.8, 0.1, 0.1), 0.9, 0.3);
     Material diff_grey(Vec3(0.8, 0.8, 0.2), 0.9, 0.5, 0.9);
     Material ground(Vec3(0.2, 0.9, 0.2), 0.5, 0.1);
 

@@ -1,37 +1,37 @@
 [
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/main.cpp.o -c /home/conner/repos/pathtrace/src/main.cpp",
-  "file": "/home/conner/repos/pathtrace/src/main.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/main.cpp.o -c /home/thejovialknight/repos/pathtrace/src/main.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/main.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/camera.cpp.o -c /home/conner/repos/pathtrace/src/camera.cpp",
-  "file": "/home/conner/repos/pathtrace/src/camera.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/camera.cpp.o -c /home/thejovialknight/repos/pathtrace/src/camera.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/camera.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/cm_math.cpp.o -c /home/conner/repos/pathtrace/src/cm_math.cpp",
-  "file": "/home/conner/repos/pathtrace/src/cm_math.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/cm_math.cpp.o -c /home/thejovialknight/repos/pathtrace/src/cm_math.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/cm_math.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/sphere.cpp.o -c /home/conner/repos/pathtrace/src/sphere.cpp",
-  "file": "/home/conner/repos/pathtrace/src/sphere.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/sphere.cpp.o -c /home/thejovialknight/repos/pathtrace/src/sphere.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/sphere.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/tracer.cpp.o -c /home/conner/repos/pathtrace/src/tracer.cpp",
-  "file": "/home/conner/repos/pathtrace/src/tracer.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/tracer.cpp.o -c /home/thejovialknight/repos/pathtrace/src/tracer.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/tracer.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/vec3.cpp.o -c /home/conner/repos/pathtrace/src/vec3.cpp",
-  "file": "/home/conner/repos/pathtrace/src/vec3.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/vec3.cpp.o -c /home/thejovialknight/repos/pathtrace/src/vec3.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/vec3.cpp"
 },
 {
-  "directory": "/home/conner/repos/pathtrace/build",
-  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/world.cpp.o -c /home/conner/repos/pathtrace/src/world.cpp",
-  "file": "/home/conner/repos/pathtrace/src/world.cpp"
+  "directory": "/home/thejovialknight/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/thejovialknight/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/world.cpp.o -c /home/thejovialknight/repos/pathtrace/src/world.cpp",
+  "file": "/home/thejovialknight/repos/pathtrace/src/world.cpp"
 }
 ]

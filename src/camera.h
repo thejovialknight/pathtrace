@@ -1,3 +1,11 @@
+// Okay, hi again. It's the GameOverGreggy show back from the dead. Let's eat some oreos.
+// This lower left corner, horizontal, and vertical business is the actual world space position of the camera plane, I think.
+// Therefore, we need to make sure our new system works with get ray. It will just be a matter of recreating this idea of the camera plane ourselves.
+// Try to offload as much calculation into not being per pixel or sample as possible.
+//
+// We need a camera with a position and a look direction. Eventually quaternions might be good but ya.
+// The idea is to create a Transform struct that gets applied to all objects.
+//
 // Hello, some notes:
 // This way of dealing with the camera and the tracing and shit is obviously fucked.
 // We are going to need a way to set up the camera in a sane manner, the way one might expect.
@@ -15,20 +23,23 @@
 
 #include "vec3.h"
 #include "ray.h"
+#include "transform.h"
 
 struct Camera {
     // Member variables
-    Vec3 position;
-    Vec3 look_direction;
-    Vec3 fov; // vertical
+    Vec3 origin;
+    Vec3 orientation;
+    Vec3 view_up;
+    double vertical_fov; // vertical
+    double aspect_ratio;
 
-    Vec3 lower_left_corner;
-    Vec3 horizontal;
-    Vec3 vertical;
-    double focal_length;
+    Vec3 view_target;
+    Vec3 viewport_origin;
+    Vec3 viewport_horizontal;
+    Vec3 viewport_vertical;
 
     // Constructor
-    Camera(Vec3 position, Vec3 look_direction);
+    Camera(Vec3 origin, Vec3 orientation);
 
     // Methods
     void transform(Vec3 translation, Vec3 rotation);

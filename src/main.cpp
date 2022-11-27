@@ -6,8 +6,7 @@
 //
 // Wait, Conner! Should you really do this before implementing Vulkan stuff? I think so, to be honest. You will be required to figure out all the math and how it works in order to do the camera and transform refactors properly. This is nothing but a good thing for Vulkan stuff.
 //
-// Okay, so what should the refactor entail?
-//
+// Okay, so what should the refactor entail
 // First, a Transform struct which contains the following:
 //  - v3 position
 //  - v3 forward // "look direction"
@@ -58,7 +57,7 @@ int main() {
 
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world(
-        Camera(Vec3(0, 0, 1), Vec3(0, 0, 1)),
+        Camera(Vec3(0, 0, 1), Vec3(0.2, 0.3, 0.9)),
         {
             Sphere(Vec3(0, 0, -1), 0.5, &diff_grey),
             Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red),
@@ -97,14 +96,21 @@ int main() {
 			}
 
             if(sdl_event.type == SDL_MOUSEMOTION) {
-                const double rotation_speed = 30;
-                world.camera.rotate(Vec3(sdl_event.motion.xrel * rotation_speed, sdl_event.motion.yrel * rotation_speed, 0));
+                const double rotation_speed = 0.005;
+                world.camera.rotate(
+                    Vec3(
+                        0,
+                        sdl_event.motion.yrel * rotation_speed, 
+                        sdl_event.motion.xrel * rotation_speed
+                    )
+                );
             }
 
             if(sdl_event.type == SDL_KEYDOWN) {
                 switch(sdl_event.key.keysym.sym) {
                     case SDLK_ESCAPE :
                         quit = true;
+                        std::cout << "SDL_ESCAPE fired!" << quit << std::endl;
                         break;
                     case SDLK_LEFT :
                         left = true;
@@ -166,7 +172,7 @@ int main() {
                 }
             }
 	    }
-        
+
         cam_velocity.x = 0;
         cam_velocity.z = 0;
         if(left) cam_velocity.x -= x_speed;
@@ -180,7 +186,7 @@ int main() {
         Uint32 render_start_time = SDL_GetTicks();
         tracer.render(world);
         Uint32 render_time = SDL_GetTicks() - render_start_time;
-        std::cout << "Render took " << render_time << "ms" << std::endl;
+        //std::cout << "Render took " << render_time << "ms" << std::endl;
         tracer.draw_frame(renderer);
 	}
 

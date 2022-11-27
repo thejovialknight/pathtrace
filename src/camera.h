@@ -1,3 +1,10 @@
+// 11/26/22 Updated notes: The get_ray function just takes a u and v coord which is the screen space position of the ray origin. It then calculates the relationship between that and the actual square world space represenation of the camera. This is what's going on with all the lower_left_corner and horizontal/vertical shit, I think. I think those are all world space representations.
+//
+// If that's the case, adapting this to a regular 3d camera should be relatively trivial. We just need to create a world space square that can be related to screen space, and calculate the forward direction, which I suppose is literally just the look direction of the damn thng. That being said, perhaps quaternions would be a worthy time investment. Not sure. Could very well be, idk. But for the purposes of firing rays just try and get the calculations per sample down as low as possible, which I think should be easy enough on its own. We can switch to quaternions later if we feel it's necessary.
+//
+// After this we need to start adding more primitives to the thing and jeez hopefully introduce Vulkan support soon enough.
+//
+//
 // Hello, some notes:
 // This way of dealing with the camera and the tracing and shit is obviously fucked.
 // We are going to need a way to set up the camera in a sane manner, the way one might expect.

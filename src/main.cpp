@@ -56,7 +56,6 @@ int main() {
     Material diff_grey(Vec3(0.8, 0.8, 0.2), 0.9, 0.5, 0.9);
     Material ground(Vec3(0.2, 0.9, 0.2), 0.5, 0.1);
 
-    // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world(
         Camera(Vec3(0, 0, 1), Vec3(0, 0, 1)),
         {

@@ -57,7 +57,7 @@ int main() {
 
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world(
-        Camera(Vec3(0, 0, 1), Vec3(0.2, 0.3, 0.9)),
+        Camera(Vec3(0, 0, 1), Vec3(0.2361, 0.3265, 0.9214)),
         {
             Sphere(Vec3(0, 0, -1), 0.5, &diff_grey),
             Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red),
@@ -96,7 +96,7 @@ int main() {
 			}
 
             if(sdl_event.type == SDL_MOUSEMOTION) {
-                const double rotation_speed = 0.005;
+                const double rotation_speed = 0.007154;
                 world.camera.rotate(
                     Vec3(
                         0,

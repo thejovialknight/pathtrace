@@ -50,7 +50,7 @@ void Camera::transform(Vec3 translation, Vec3 rotation) {
     double viewport_height = 2.0 * h;
     double viewport_width = aspect_ratio * viewport_height;
 
-    Vec3 w = unit_vector((origin + orientation) - origin);
+    Vec3 w = unit_vector(origin - view_target);
     Vec3 u = unit_vector(cross(view_up, w));
     Vec3 v = cross(w, u);
 

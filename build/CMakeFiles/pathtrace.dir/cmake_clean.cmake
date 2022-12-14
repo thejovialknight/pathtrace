@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pathtrace.dir/src/cm_math.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/main.cpp.o"
   "CMakeFiles/pathtrace.dir/src/main.cpp.o.d"
+  "CMakeFiles/pathtrace.dir/src/platform.cpp.o"
+  "CMakeFiles/pathtrace.dir/src/platform.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/sphere.cpp.o"
   "CMakeFiles/pathtrace.dir/src/sphere.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/tracer.cpp.o"

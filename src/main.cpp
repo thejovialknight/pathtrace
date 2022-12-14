@@ -28,27 +28,13 @@
 #include "tracer.h"
 #include "world.h"
 #include "random.h"
+#include "platform.h"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
 
 int main() {
-	if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		std::cout << "Error initializing SDL!" << std::endl;
-		return 1;
-	}
-
-	SDL_Window* window = SDL_CreateWindow("pathtrace", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
-	if(!window) {
-		std::cout << "Error creating window!" << std::endl;
-		return 1;
-	}
-
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if(!renderer) {
-		std::cout << "Error creating renderer!" << std::endl;
-		return 1;
-	}
+    Platform platform = init_platform();
 
     // Materials
     Material diff_red(Vec3(0.8, 0.1, 0.1), 0.9, 0.3);
@@ -184,12 +170,12 @@ int main() {
 
         // Render (with a timer)
         Uint32 render_start_time = SDL_GetTicks();
-        tracer.render(world);
+        tracer.render(platform, world);
         Uint32 render_time = SDL_GetTicks() - render_start_time;
         //std::cout << "Render took " << render_time << "ms" << std::endl;
-        tracer.draw_frame(renderer);
+        render_platform(&platform);
 	}
 
-	SDL_DestroyWindow(window);
+	SDL_DestroyWindow(platform.window);
 	SDL_Quit();
 }

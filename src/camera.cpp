@@ -19,7 +19,7 @@ void Camera::transform(Vec3 translation, Vec3 rotation) {
     // pitch = v = y
     // yaw = w = z
     //
-    // Rotate orientation around x axis by roll angle (rotation.x) 
+    /* Rotate orientation around x axis by roll angle (rotation.x) 
     if(rotation.x > 0.001) {
         orientation.x = orientation.x;
         orientation.y = orientation.y * cos(rotation.x) - orientation.z * sin(rotation.x);
@@ -37,12 +37,15 @@ void Camera::transform(Vec3 translation, Vec3 rotation) {
         orientation.y = orientation.x * sin(rotation.z) + orientation.y * cos(rotation.z);
         orientation.z = orientation.z;
     }
+    */
     
     view_target = origin + orientation;
 
+    /*
     std::cout << "Rotation: " << rotation.x << "|" << rotation.y << "|" << rotation.z << "|" << std::endl;
     std::cout << "Orientation: " << orientation.x << "|" << orientation.y << "|" << orientation.z << "|" << std::endl;
     std::cout << "View target: " << view_target.x << "|" << view_target.y << "|" << view_target.z << "|" << std::endl;
+    */
 
     // Calculate viewport
     double theta = degrees_to_radians(vertical_fov);

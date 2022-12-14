@@ -16,6 +16,11 @@
 },
 {
   "directory": "/home/conner/repos/pathtrace/build",
+  "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/platform.cpp.o -c /home/conner/repos/pathtrace/src/platform.cpp",
+  "file": "/home/conner/repos/pathtrace/src/platform.cpp"
+},
+{
+  "directory": "/home/conner/repos/pathtrace/build",
   "command": "/usr/bin/c++  -I/home/conner/repos/pathtrace/include -I/usr/include/SDL2 -std=gnu++17 -o CMakeFiles/pathtrace.dir/src/sphere.cpp.o -c /home/conner/repos/pathtrace/src/sphere.cpp",
   "file": "/home/conner/repos/pathtrace/src/sphere.cpp"
 },

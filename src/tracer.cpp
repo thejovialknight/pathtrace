@@ -6,31 +6,39 @@
 #include "tracer.h"
 #include "random.h"
 
-void Pathtracer::render(const World& world) { 	
+void Pathtracer::render(Platform& platform, const World& world) { 	
 	// Render image
-	for(int y = IMAGE_HEIGHT - 1; y >= 0; --y) {
-		for(int x = 0; x < IMAGE_WIDTH; ++x) {
-            render_pixel(world, *this, x, y);
+	for(int y = platform.win_h - 1; y >= 0; --y) {
+		for(int x = 0; x < platform.win_w; ++x) {
+            Vec3 color = render_pixel(world, platform, *this, x, y);
+            Color pixel_color = vec3_to_color(color);
+            draw_pixel(&platform, &pixel_color, x, y);
         }
     }
 }
 
-void render_pixel(const World& world, Pathtracer& tracer, int x, int y) {
-    // Get color. Once we get multiple samples we will
-    // need to scale the color by the number of samples
-    // i.e. scale = 1.0 / samples_per_pixel; c.r *- scale; etc...
+Color vec3_to_color(Vec3 &color) {
+    Color pixel_color;
+    pixel_color.channels.r = color.x;
+    pixel_color.channels.g = color.y;
+    pixel_color.channels.b = color.z;
+    pixel_color.channels.a = 255;
+    return pixel_color;
+}
+
+Vec3 render_pixel(const World& world, Platform& platform, Pathtracer& tracer, int x, int y) {
     Vec3 pixel_color(0, 0, 0);
     for(int s = 0; s < SAMPLES_PER_PIXEL; ++s) {
-        double u = (x + random_double()) / (IMAGE_WIDTH - 1);
-        double v = (y + random_double()) / (IMAGE_HEIGHT - 1);
+        double u = (x + random_double()) / (platform.win_w - 1);
+        double v = (y + random_double()) / (platform.win_h - 1);
         Ray ray = world.camera.get_ray(u, v);
-        pixel_color = pixel_color + color_from_ray(ray, world, MAX_DEPTH) * 255.0;
+        pixel_color = pixel_color + color_from_ray(ray, world, MAX_DEPTH) * 254.0;
     }
     double luminance_scalar = 1.0 / SAMPLES_PER_PIXEL;
     pixel_color.x = (luminance_scalar * pixel_color.x);
     pixel_color.y = (luminance_scalar * pixel_color.y);
     pixel_color.z = (luminance_scalar * pixel_color.z);
-    tracer.pixel_colors[x + y * IMAGE_WIDTH] = pixel_color;
+    return pixel_color;
 }
 
 // Even more hacky approximation of a diffuse material. Probably not even be as performant.
@@ -124,6 +132,7 @@ Vec3 color_from_ray(const Ray& ray, const World& world, int depth) {
     // SKY BLUE */ return (1.0 - t) * Vec3(0.5, 0.3, 0.9) + t * Vec3(0.9, 0.9, 0.9);
 }
 
+/*
 void Pathtracer::draw_frame(SDL_Renderer* renderer) {
     SDL_RenderClear(renderer);
     for(int y = 0; y < IMAGE_HEIGHT; ++y) {
@@ -140,3 +149,4 @@ void Pathtracer::draw_frame(SDL_Renderer* renderer) {
 	}
 	SDL_RenderPresent(renderer);
 }
+*/

@@ -111,10 +111,24 @@ CMakeFiles/pathtrace.dir/src/cm_math.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pathtrace.dir/src/cm_math.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/conner/repos/pathtrace/src/cm_math.cpp -o CMakeFiles/pathtrace.dir/src/cm_math.cpp.s
 
+CMakeFiles/pathtrace.dir/src/platform.cpp.o: CMakeFiles/pathtrace.dir/flags.make
+CMakeFiles/pathtrace.dir/src/platform.cpp.o: ../src/platform.cpp
+CMakeFiles/pathtrace.dir/src/platform.cpp.o: CMakeFiles/pathtrace.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pathtrace.dir/src/platform.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pathtrace.dir/src/platform.cpp.o -MF CMakeFiles/pathtrace.dir/src/platform.cpp.o.d -o CMakeFiles/pathtrace.dir/src/platform.cpp.o -c /home/conner/repos/pathtrace/src/platform.cpp
+
+CMakeFiles/pathtrace.dir/src/platform.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pathtrace.dir/src/platform.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/conner/repos/pathtrace/src/platform.cpp > CMakeFiles/pathtrace.dir/src/platform.cpp.i
+
+CMakeFiles/pathtrace.dir/src/platform.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pathtrace.dir/src/platform.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/conner/repos/pathtrace/src/platform.cpp -o CMakeFiles/pathtrace.dir/src/platform.cpp.s
+
 CMakeFiles/pathtrace.dir/src/sphere.cpp.o: CMakeFiles/pathtrace.dir/flags.make
 CMakeFiles/pathtrace.dir/src/sphere.cpp.o: ../src/sphere.cpp
 CMakeFiles/pathtrace.dir/src/sphere.cpp.o: CMakeFiles/pathtrace.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pathtrace.dir/src/sphere.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pathtrace.dir/src/sphere.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pathtrace.dir/src/sphere.cpp.o -MF CMakeFiles/pathtrace.dir/src/sphere.cpp.o.d -o CMakeFiles/pathtrace.dir/src/sphere.cpp.o -c /home/conner/repos/pathtrace/src/sphere.cpp
 
 CMakeFiles/pathtrace.dir/src/sphere.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/pathtrace.dir/src/sphere.cpp.s: cmake_force
 CMakeFiles/pathtrace.dir/src/tracer.cpp.o: CMakeFiles/pathtrace.dir/flags.make
 CMakeFiles/pathtrace.dir/src/tracer.cpp.o: ../src/tracer.cpp
 CMakeFiles/pathtrace.dir/src/tracer.cpp.o: CMakeFiles/pathtrace.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pathtrace.dir/src/tracer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pathtrace.dir/src/tracer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pathtrace.dir/src/tracer.cpp.o -MF CMakeFiles/pathtrace.dir/src/tracer.cpp.o.d -o CMakeFiles/pathtrace.dir/src/tracer.cpp.o -c /home/conner/repos/pathtrace/src/tracer.cpp
 
 CMakeFiles/pathtrace.dir/src/tracer.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/pathtrace.dir/src/tracer.cpp.s: cmake_force
 CMakeFiles/pathtrace.dir/src/vec3.cpp.o: CMakeFiles/pathtrace.dir/flags.make
 CMakeFiles/pathtrace.dir/src/vec3.cpp.o: ../src/vec3.cpp
 CMakeFiles/pathtrace.dir/src/vec3.cpp.o: CMakeFiles/pathtrace.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pathtrace.dir/src/vec3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pathtrace.dir/src/vec3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pathtrace.dir/src/vec3.cpp.o -MF CMakeFiles/pathtrace.dir/src/vec3.cpp.o.d -o CMakeFiles/pathtrace.dir/src/vec3.cpp.o -c /home/conner/repos/pathtrace/src/vec3.cpp
 
 CMakeFiles/pathtrace.dir/src/vec3.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/pathtrace.dir/src/vec3.cpp.s: cmake_force
 CMakeFiles/pathtrace.dir/src/world.cpp.o: CMakeFiles/pathtrace.dir/flags.make
 CMakeFiles/pathtrace.dir/src/world.cpp.o: ../src/world.cpp
 CMakeFiles/pathtrace.dir/src/world.cpp.o: CMakeFiles/pathtrace.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pathtrace.dir/src/world.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pathtrace.dir/src/world.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pathtrace.dir/src/world.cpp.o -MF CMakeFiles/pathtrace.dir/src/world.cpp.o.d -o CMakeFiles/pathtrace.dir/src/world.cpp.o -c /home/conner/repos/pathtrace/src/world.cpp
 
 CMakeFiles/pathtrace.dir/src/world.cpp.i: cmake_force
@@ -172,6 +186,7 @@ pathtrace_OBJECTS = \
 "CMakeFiles/pathtrace.dir/src/main.cpp.o" \
 "CMakeFiles/pathtrace.dir/src/camera.cpp.o" \
 "CMakeFiles/pathtrace.dir/src/cm_math.cpp.o" \
+"CMakeFiles/pathtrace.dir/src/platform.cpp.o" \
 "CMakeFiles/pathtrace.dir/src/sphere.cpp.o" \
 "CMakeFiles/pathtrace.dir/src/tracer.cpp.o" \
 "CMakeFiles/pathtrace.dir/src/vec3.cpp.o" \
@@ -183,13 +198,14 @@ pathtrace_EXTERNAL_OBJECTS =
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/main.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/camera.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/cm_math.cpp.o
+../bin/pathtrace: CMakeFiles/pathtrace.dir/src/platform.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/sphere.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/tracer.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/vec3.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/src/world.cpp.o
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/build.make
 ../bin/pathtrace: CMakeFiles/pathtrace.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../bin/pathtrace"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/conner/repos/pathtrace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable ../bin/pathtrace"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pathtrace.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

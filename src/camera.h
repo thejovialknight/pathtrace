@@ -24,6 +24,7 @@
 #include "vec3.h"
 #include "ray.h"
 #include "transform.h"
+#include "quaternion.h"
 
 struct Camera {
     // Member variables

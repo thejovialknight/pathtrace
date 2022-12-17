@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../bin/pathtrace"
-  "../bin/pathtrace.pdb"
+  "/home/thejovialknight/repos/pathtrace/bin/pathtrace"
+  "/home/thejovialknight/repos/pathtrace/bin/pathtrace.pdb"
   "CMakeFiles/pathtrace.dir/src/camera.cpp.o"
   "CMakeFiles/pathtrace.dir/src/camera.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/cm_math.cpp.o"
@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pathtrace.dir/src/main.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/platform.cpp.o"
   "CMakeFiles/pathtrace.dir/src/platform.cpp.o.d"
+  "CMakeFiles/pathtrace.dir/src/quaternion.cpp.o"
+  "CMakeFiles/pathtrace.dir/src/quaternion.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/sphere.cpp.o"
   "CMakeFiles/pathtrace.dir/src/sphere.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/tracer.cpp.o"

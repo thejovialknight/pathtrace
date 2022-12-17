@@ -1,10 +1,8 @@
-CMakeFiles/pathtrace.dir/src/world.cpp.o: \
- /home/thejovialknight/repos/pathtrace/src/world.cpp \
+CMakeFiles/pathtrace.dir/src/quaternion.cpp.o: \
+ /home/thejovialknight/repos/pathtrace/src/quaternion.cpp \
  /usr/include/stdc-predef.h \
- /home/thejovialknight/repos/pathtrace/src/world.h \
- /home/thejovialknight/repos/pathtrace/src/sphere.h \
- /home/thejovialknight/repos/pathtrace/src/vec3.h \
- /usr/include/c++/9/cmath \
+ /home/thejovialknight/repos/pathtrace/src/quaternion.h \
+ /usr/include/c++/9/math.h /usr/include/c++/9/cmath \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -83,9 +81,11 @@ CMakeFiles/pathtrace.dir/src/world.cpp.o: \
  /usr/include/c++/9/tr1/modified_bessel_func.tcc \
  /usr/include/c++/9/tr1/poly_hermite.tcc \
  /usr/include/c++/9/tr1/poly_laguerre.tcc \
- /usr/include/c++/9/tr1/riemann_zeta.tcc /usr/include/c++/9/random \
- /usr/include/c++/9/cstdlib /usr/include/c++/9/string \
- /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/memoryfwd.h \
+ /usr/include/c++/9/tr1/riemann_zeta.tcc \
+ /home/thejovialknight/repos/pathtrace/src/vec3.h \
+ /usr/include/c++/9/random /usr/include/c++/9/cstdlib \
+ /usr/include/c++/9/string /usr/include/c++/9/bits/stringfwd.h \
+ /usr/include/c++/9/bits/memoryfwd.h \
  /usr/include/c++/9/bits/char_traits.h /usr/include/c++/9/bits/postypes.h \
  /usr/include/c++/9/cwchar /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h \
@@ -159,11 +159,5 @@ CMakeFiles/pathtrace.dir/src/world.cpp.o: \
  /usr/include/c++/9/bits/random.tcc /usr/include/c++/9/numeric \
  /usr/include/c++/9/bits/stl_numeric.h \
  /usr/include/c++/9/pstl/glue_numeric_defs.h \
- /usr/include/c++/9/pstl/execution_defs.h /usr/include/c++/9/math.h \
- /home/thejovialknight/repos/pathtrace/src/random.h \
- /home/thejovialknight/repos/pathtrace/src/ray.h \
- /home/thejovialknight/repos/pathtrace/src/hitinfo.h \
- /home/thejovialknight/repos/pathtrace/src/material.h \
- /home/thejovialknight/repos/pathtrace/src/camera.h \
- /home/thejovialknight/repos/pathtrace/src/transform.h \
- /home/thejovialknight/repos/pathtrace/src/quaternion.h
+ /usr/include/c++/9/pstl/execution_defs.h \
+ /home/thejovialknight/repos/pathtrace/src/random.h

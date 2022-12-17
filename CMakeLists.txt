@@ -27,6 +27,8 @@ add_executable(pathtrace
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/color.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/platform.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/platform.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/quaternion.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/quaternion.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/sphere.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/sphere.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/tracer.cpp"

@@ -14,16 +14,14 @@ Quaternion Quaternion::inverse() {
 }
 
 Vec3 get_rotated(const Vec3& e_point, const Vec3& e_rotation) {
-    // Construct the original point represented as a quaternion
-    Quaternion p = Quaternion(0, e_point.x, e_point.y, e_point.z);
-
-    // This is the quaternion which represents the rotation 
-    Quaternion rotation = quaternion_from_euler(e_rotation); //* identity_quaternion();
+    Quaternion point = Quaternion(0, e_point.x, e_point.y, e_point.z);
+    Quaternion rotation = quaternion_from_euler(e_rotation).normalized(); // * identity_quaternion();
     Quaternion inverse = rotation.inverse();
 
     // Perform the (passive) rotation
-    p = rotation * p * inverse;
-    return Vec3(p.x, p.y, p.z);
+    point = rotation * point * inverse;
+    //point = inverse * point * rotation;
+    return Vec3(point.x, point.y, point.z);
 }
 
 Quaternion quaternion_from_euler(const Vec3& euler) {

@@ -11,7 +11,7 @@ struct Platform init_platform() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	platform.win_w = 128;
 	platform.win_h = 128; 
-	platform.window = SDL_CreateWindow("cnake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2560, 1440, SDL_WINDOW_FULLSCREEN);
+	platform.window = SDL_CreateWindow("cnake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2560, 1440, SDL_WINDOW_SHOWN);
 	platform.renderer = SDL_CreateRenderer(platform.window, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetWindowMinimumSize(platform.window, platform.win_w, platform.win_h);
 	SDL_RenderSetLogicalSize(platform.renderer, platform.win_w, platform.win_h);

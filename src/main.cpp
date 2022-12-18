@@ -43,7 +43,7 @@ int main() {
 
     // Doesn't depend on order of instantiation, thank god. Referring to the depth order glitch
     World world(
-        Camera(Vec3(0, 0, 1), Vec3(0.2361, 0.3265, 0.9214)),
+        Camera(Vec3(0, 0, 1), Vec3(0, 1, 3)),
         {
             Sphere(Vec3(0, 0, -1), 0.5, &diff_grey),
             Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red),
@@ -75,6 +75,7 @@ int main() {
 
 	bool quit = false;
 	while(!quit) {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
 		SDL_Event sdl_event;
 		while(SDL_PollEvent(&sdl_event) != 0) {
 			if(sdl_event.type == SDL_QUIT) {
@@ -83,13 +84,16 @@ int main() {
 
             if(sdl_event.type == SDL_MOUSEMOTION) {
                 const double rotation_speed = 0.007154;
-                world.camera.rotate(
+                /*world.camera.rotate(
                     Vec3(
                         0,
-                        sdl_event.motion.yrel * rotation_speed, 
-                        sdl_event.motion.xrel * rotation_speed
+                        (double)sdl_event.motion.yrel * rotation_speed, 
+                        (double)sdl_event.motion.xrel * rotation_speed
                     )
-                );
+                );*/
+
+                std::cout << "XREL: " << sdl_event.motion.xrel << std::endl;
+                std::cout << "YREl: " << sdl_event.motion.yrel << std::endl;
             }
 
             if(sdl_event.type == SDL_KEYDOWN) {
@@ -111,16 +115,16 @@ int main() {
                         down = true;
                         break;
                     case SDLK_a :
-                        sphere_direction.x = -sphere_speed;
+                        sphere_direction.y = -sphere_speed;
                         break;
                     case SDLK_d :
-                        sphere_direction.x = sphere_speed;
+                        sphere_direction.y = sphere_speed;
                         break;
                     case SDLK_w :
-                        sphere_direction.z = -sphere_speed;
+                        sphere_direction.x = -sphere_speed;
                         break;
                     case SDLK_s :
-                        sphere_direction.z = sphere_speed;
+                        sphere_direction.x = sphere_speed;
                         break;
                     default :
                         break;
@@ -142,16 +146,16 @@ int main() {
                         down = false;
                         break;
                     case SDLK_a :
-                        sphere_direction.x = 0;
+                        sphere_direction.y = 0;
                         break;
                     case SDLK_d :
-                        sphere_direction.x = 0;
+                        sphere_direction.y = 0;
                         break;
                     case SDLK_w :
-                        sphere_direction.z = 0;
+                        sphere_direction.x = 0;
                         break;
                     case SDLK_s :
-                        sphere_direction.z = 0;
+                        sphere_direction.x = 0;
                         break;
                     default :
                         break;
@@ -160,12 +164,12 @@ int main() {
 	    }
 
         cam_velocity.x = 0;
-        cam_velocity.z = 0;
+        cam_velocity.y = 0;
         if(left) cam_velocity.x -= x_speed;
         if(right) cam_velocity.x += x_speed;
-        if(up) cam_velocity.z -= x_speed;
-        if(down) cam_velocity.z += x_speed;
-        world.camera.translate(cam_velocity);
+        if(up) cam_velocity.y -= x_speed;
+        if(down) cam_velocity.y += x_speed;
+        world.camera.transform(cam_velocity, sphere_direction);
         world.spheres[0].center = world.spheres[0].center + sphere_direction * sphere_speed;
 
         // Render (with a timer)

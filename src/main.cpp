@@ -165,6 +165,7 @@ int main() {
 
         cam_velocity.x = 0;
         cam_velocity.y = 0;
+        cam_velocity.z = 0;
         if(left) cam_velocity.x -= x_speed;
         if(right) cam_velocity.x += x_speed;
         if(up) cam_velocity.y -= x_speed;

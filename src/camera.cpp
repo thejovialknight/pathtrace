@@ -2,6 +2,10 @@
 #include <iostream>
 
 Camera::Camera(Vec3 origin, Vec3 orientation) : origin(origin), orientation(orientation) {
+    // Angle stuff 
+    yaw = 0;
+    pitch = 0;
+
     vertical_fov = 90.0;
     view_up = Vec3(0, 1, 0);
     aspect_ratio = 1;
@@ -9,14 +13,64 @@ Camera::Camera(Vec3 origin, Vec3 orientation) : origin(origin), orientation(orie
 }
 
 void Camera::transform(Vec3 translation, Vec3 rotation) {
-    double rotate_speed = 0.2;
+    double rotate_speed = 0.4;
     if(!rotation.near_zero()) {
-        orientation = get_rotated(orientation, unit_vector(rotation) * rotate_speed);
-        std::cout << "Orientation " << orientation.x << "," << orientation.y << "," << orientation.z << "," << std::endl;
+        yaw += rotation.x * rotate_speed;
+        pitch += rotation.y * rotate_speed;
+        if(yaw > 6.28) { yaw -= 6.28; }
+        else if(yaw < 0) { yaw += 6.28; }
+        if(pitch > 1.5) { pitch = 1.5; }
+        else if(pitch < -1.5) { pitch = -1.5; }
+                
+        orientation = Vec3(0,0,1);
+        Vec3 r(0, -yaw, pitch);
+        
+        // FUCKERY
+        // Rotate by -yaw? (2)
+        Vec3 yaw = Vec3(
+            orientation.x*cos(r.y)+orientation.z*sin(r.y),
+            orientation.y,
+            -orientation.x*sin(r.y)+orientation.z*cos(r.y)
+        );
+        // Rotate by pitch (3)
+        Vec3 pitch = Vec3(
+            orientation.x,
+            orientation.y*cos(r.z)-orientation.z*sin(r.z),
+            orientation.y*sin(r.z)+orientation.z*cos(r.z)
+        );
+        orientation = Vec3(yaw.x, pitch.y, yaw.z);
+        /* Rotate by roll? (1)
+        orientation = Vec3(
+            orientation.x*cos(r.x)-orientation.y*sin(r.x),
+            orientation.x*sin(r.x)+orientation.y*cos(r.x),
+            orientation.z
+        );
+        //*/
+
+        /* ORIGINAL
+        // Rotate by yaw
+        orientation = Vec3(
+            orientation.x*cos(r.x)-orientation.y*sin(r.x),
+            orientation.x*sin(r.x)+orientation.y*cos(r.x),
+            orientation.z
+        );
+        // Rotate by pitch
+        orientation = Vec3(
+            orientation.x*cos(r.y)+orientation.z*sin(r.y),
+            orientation.y,
+            -orientation.x*sin(r.y)+orientation.z*cos(r.y)
+        );
+        // Rotate by roll
+        orientation = Vec3(
+            orientation.x,
+            orientation.y*cos(r.z)-orientation.z*sin(r.z),
+            orientation.y*sin(r.z)+orientation.z*cos(r.z)
+        );
+        //*/
     }
 
     // Translate origin
-    double move_speed = 4;
+    double move_speed = 1;
     if(!translation.near_zero()) {
         Vec3 right = cross(orientation, view_up);
         Vec3 forward = cross(right, view_up);
@@ -57,3 +111,4 @@ Ray Camera::get_ray(double s, double t) const {
 double degrees_to_radians(double degrees) {
     return degrees * 0.0174533;
 }
+

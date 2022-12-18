@@ -1,3 +1,4 @@
 CMakeFiles/pathtrace.dir/src/cm_math.cpp.o: \
- /home/conner/repos/pathtrace/src/cm_math.cpp /usr/include/stdc-predef.h \
- /home/conner/repos/pathtrace/src/cm_math.h
+ /home/thejovialknight/repos/pathtrace/src/cm_math.cpp \
+ /usr/include/stdc-predef.h \
+ /home/thejovialknight/repos/pathtrace/src/cm_math.h

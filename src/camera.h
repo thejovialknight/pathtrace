@@ -27,6 +27,10 @@
 #include "quaternion.h"
 
 struct Camera {
+    // Angles
+    double yaw;
+    double pitch;
+
     // Member variables
     Vec3 origin;
     Vec3 orientation;

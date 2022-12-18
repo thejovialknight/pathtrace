@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../bin/pathtrace"
-  "../bin/pathtrace.pdb"
+  "/home/thejovialknight/repos/pathtrace/bin/pathtrace"
+  "/home/thejovialknight/repos/pathtrace/bin/pathtrace.pdb"
   "CMakeFiles/pathtrace.dir/src/camera.cpp.o"
   "CMakeFiles/pathtrace.dir/src/camera.cpp.o.d"
   "CMakeFiles/pathtrace.dir/src/cm_math.cpp.o"

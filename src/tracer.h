@@ -12,8 +12,8 @@
 #include <cmath>
 #include <limits>
 
-#define SAMPLES_PER_PIXEL 6 
-#define MAX_DEPTH 4
+#define SAMPLES_PER_PIXEL 4 
+#define MAX_DEPTH 3
 
 struct Pathtracer {
     void render(Platform& platform, const World& world);

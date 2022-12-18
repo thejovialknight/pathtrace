@@ -22,6 +22,8 @@ struct Quaternion {
 };
 
 Quaternion operator*(const Quaternion& a, const Quaternion& b);
+Vec3 get_camera_orientation(double pitch, double yaw);
+Vec3 get_rotated_from_axis_angle(Vec3& point, Vec3& axis, double angle);
 Vec3 get_rotated(const Vec3& e_point, const Vec3& e_rotation);
 Quaternion identity_quaternion();
 Quaternion quaternion_from_euler(const Vec3& euler);

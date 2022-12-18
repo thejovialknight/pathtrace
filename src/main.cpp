@@ -34,6 +34,19 @@
 #define WINDOW_HEIGHT 1024
 
 int main() {
+    Vec3 p(0,1,0);
+    Vec3 a(0,1,0);
+    Vec3 r;
+    double amount = 3.14;
+    r = get_rotated_from_axis_angle(p, a, amount);
+    std::cout << "Rot y: " << r.x << ',' << r.y << ',' << r.z << ',' << std::endl;
+    a = Vec3(0,0,1);
+    r = get_rotated_from_axis_angle(p, a, amount);
+    std::cout << "Rot z: " << r.x << ',' << r.y << ',' << r.z << ',' << std::endl;
+    a = Vec3(1,0,0);
+    r = get_rotated_from_axis_angle(p, a, amount);
+    std::cout << "Rot x: " << r.x << ',' << r.y << ',' << r.z << ',' << std::endl;
+
     Platform platform = init_platform();
 
     // Materials
@@ -45,7 +58,7 @@ int main() {
     World world(
         Camera(Vec3(0, 0, 1), Vec3(0, 1, 3)),
         {
-            Sphere(Vec3(0, 0, -1), 0.5, &diff_grey),
+            Sphere(Vec3(0, 0, -1), 0.1, &diff_grey),
             Sphere(Vec3(0.5, 0, -2), 0.2, &diff_red),
             Sphere(Vec3(1.5, 0, -2), 0.2, &diff_red),
             Sphere(Vec3(2.5, 0, -2), 0.2, &diff_red),
@@ -99,7 +112,7 @@ int main() {
             if(sdl_event.type == SDL_KEYDOWN) {
                 switch(sdl_event.key.keysym.sym) {
                     case SDLK_ESCAPE :
-                        quit = true;
+                        //quit = true;
                         std::cout << "SDL_ESCAPE fired!" << quit << std::endl;
                         break;
                     case SDLK_LEFT :
@@ -115,16 +128,16 @@ int main() {
                         down = true;
                         break;
                     case SDLK_a :
-                        sphere_direction.y = -sphere_speed;
-                        break;
-                    case SDLK_d :
-                        sphere_direction.y = sphere_speed;
-                        break;
-                    case SDLK_w :
                         sphere_direction.x = -sphere_speed;
                         break;
-                    case SDLK_s :
+                    case SDLK_d :
                         sphere_direction.x = sphere_speed;
+                        break;
+                    case SDLK_w :
+                        sphere_direction.y = -sphere_speed;
+                        break;
+                    case SDLK_s :
+                        sphere_direction.y = sphere_speed;
                         break;
                     default :
                         break;
@@ -146,16 +159,16 @@ int main() {
                         down = false;
                         break;
                     case SDLK_a :
-                        sphere_direction.y = 0;
+                        sphere_direction.x = 0;
                         break;
                     case SDLK_d :
-                        sphere_direction.y = 0;
+                        sphere_direction.x = 0;
                         break;
                     case SDLK_w :
-                        sphere_direction.x = 0;
+                        sphere_direction.y = 0;
                         break;
                     case SDLK_s :
-                        sphere_direction.x = 0;
+                        sphere_direction.y = 0;
                         break;
                     default :
                         break;
@@ -171,7 +184,8 @@ int main() {
         if(up) cam_velocity.y -= x_speed;
         if(down) cam_velocity.y += x_speed;
         world.camera.transform(cam_velocity, sphere_direction);
-        world.spheres[0].center = world.spheres[0].center + sphere_direction * sphere_speed;
+        //world.spheres[0].center = world.spheres[0].center + sphere_direction * sphere_speed;
+        world.spheres[0].center = world.camera.origin + world.camera.orientation;
 
         // Render (with a timer)
         Uint32 render_start_time = SDL_GetTicks();
